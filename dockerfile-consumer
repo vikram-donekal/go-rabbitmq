@@ -1,0 +1,17 @@
+FROM golang
+
+
+
+# create a working directory
+WORKDIR /go/src/app
+
+
+# add source code
+ADD consumer consumer
+
+
+
+
+
+# run main.go
+CMD ["go", "run", "consumer/app/src/RabbitMq/main.go"]

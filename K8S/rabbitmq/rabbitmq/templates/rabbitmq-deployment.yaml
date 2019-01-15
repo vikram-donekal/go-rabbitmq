@@ -1,0 +1,50 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: rabbitmq-app
+  
+  labels:
+    app: rabbitmq-app
+    
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+    spec:
+      
+      containers:
+      - name: rabbitmq
+        image: bitnami/rabbitmq:3.6.11-r7
+        env:
+        - name: RABBITMQ_USERNAME
+          value: "vikram"
+        - name: RABBITMQ_PASSWORD
+          value: "password"
+          
+        - name: RABBITMQ_ERLANG_COOKIE
+          value: "ZnJlYWdzT2dNZW93Y2lkaGV3a0F1cklhbGJlZ3BvYjM"
+         
+        - name: RABBITMQ_NODE_PORT
+          value: "5672"
+        - name: RABBITMQ_NODE_TYPE
+          value: "stats"
+        - name: RABBITMQ_NODE_NAME
+          value: "rabbit@localhost"
+        - name: RABBITMQ_CLUSTER_NODE_NAME
+          value: ""
+        - name: RABBITMQ_VHOST
+          value: "/"
+        - name: RABBITMQ_MANAGER_PORT
+          value: "15672"
+ 
+        ports:
+        - name: epmd
+          containerPort: 4369
+        - name: ampq
+          containerPort: 5672
+        - name: dist
+          containerPort: 25672
+        - name: stats
+          containerPort: 15672
